@@ -132,6 +132,104 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+/* ===== Ayush Kolla portfolio design system ===== */
+:root {
+  --cream: #fcf6f5;
+  --cream-dim: #efe1df;
+  --brand: #990011;
+  --accent-red: #c41230;
+  --deep-red: #5e0009;
+  --ink: #150005;
+  --ink-soft: #260910;
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: var(--cream);
+  --card-foreground: var(--ink);
+  --primary: var(--brand);
+  --primary-foreground: var(--cream);
+  --secondary: var(--cream-dim);
+  --secondary-foreground: var(--ink);
+  --muted: var(--cream-dim);
+  --muted-foreground: #6b4a4a;
+  --accent: var(--accent-red);
+  --accent-foreground: var(--cream);
+  --border: rgb(21 0 5 / 12%);
+  --input: rgb(21 0 5 / 12%);
+  --ring: var(--accent-red);
+
+  --gradient-red: linear-gradient(90deg, var(--deep-red), var(--brand) 45%, var(--accent-red));
+  --shadow-cinema: 0 30px 60px -25px rgb(94 0 9 / 45%);
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-cream-dim: var(--cream-dim);
+  --color-brand: var(--brand);
+  --color-accent-red: var(--accent-red);
+  --color-deep-red: var(--deep-red);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --animate-marquee: marquee 26s linear infinite;
+  --animate-drift: drift 7s ease-in-out infinite;
+  --animate-drift-slow: drift 9s ease-in-out infinite;
+  --animate-rise: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-bounce-soft: bounce-soft 1.8s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0.6rem, -0.5rem, 0); }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translate3d(0, 120%, 0) skewY(4deg); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) skewY(0); }
+}
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+@utility flip-3d {
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -140,5 +238,19 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
