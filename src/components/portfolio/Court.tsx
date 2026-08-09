@@ -1,12 +1,49 @@
 import { useRef } from "react";
 import { Dumbbell, Footprints, Target, Trophy, Zap } from "lucide-react";
 
+import badminton from "@/assets/ayush_badminton.png.asset.json";
+import cricket from "@/assets/cricket_ayush.png.asset.json";
+import gym from "@/assets/ayush_with_bumble.png.asset.json";
+import basketball from "@/assets/ayush_basketball.png.asset.json";
+import running from "@/assets/ayush_running.png.asset.json";
+
 const items = [
-  { icon: Trophy, title: "Basketball", line: "Court sessions, pickup games, endless jump shots." },
-  { icon: Target, title: "Cricket", line: "Weekend matches — batting order optional." },
-  { icon: Zap, title: "Badminton", line: "Fast rallies and sharper reflexes." },
-  { icon: Dumbbell, title: "Gym", line: "Strength work, logged and progressive." },
-  { icon: Footprints, title: "Running", line: "Morning kilometres to clear the head." },
+  {
+    icon: Trophy,
+    title: "Basketball",
+    line: "Court sessions, pickup games, endless jump shots.",
+    img: basketball.url,
+    wide: true,
+    pos: "object-center",
+  },
+  {
+    icon: Target,
+    title: "Cricket",
+    line: "Weekend matches — batting order optional.",
+    img: cricket.url,
+    pos: "object-top",
+  },
+  {
+    icon: Zap,
+    title: "Badminton",
+    line: "Fast rallies and sharper reflexes.",
+    img: badminton.url,
+    pos: "object-top",
+  },
+  {
+    icon: Dumbbell,
+    title: "Gym",
+    line: "Strength work, logged and progressive.",
+    img: gym.url,
+    pos: "object-top",
+  },
+  {
+    icon: Footprints,
+    title: "Running",
+    line: "Morning kilometres to clear the head.",
+    img: running.url,
+    pos: "object-top",
+  },
 ];
 
 function TiltCard({ item }: { item: (typeof items)[number] }) {
@@ -31,11 +68,34 @@ function TiltCard({ item }: { item: (typeof items)[number] }) {
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={reset}
-      className="rounded-2xl border border-ink/10 bg-cream-dim/60 p-6 transition-transform duration-200 will-change-transform hover:border-brand/40"
+      className={`group relative overflow-hidden rounded-2xl border border-ink/10 bg-cream-dim/60 transition-transform duration-200 will-change-transform hover:border-brand/40 ${
+        item.wide ? "sm:col-span-2 lg:col-span-1 lg:row-span-2" : ""
+      }`}
     >
-      <Icon className="h-6 w-6 text-brand" strokeWidth={1.5} />
-      <h3 className="mt-5 text-2xl text-ink">{item.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-ink/65">{item.line}</p>
+      <div
+        className={`relative overflow-hidden ${item.wide ? "aspect-4/3 lg:aspect-3/4" : "aspect-4/5"}`}
+      >
+        <img
+          src={item.img}
+          alt={`Ayush Kolla — ${item.title}`}
+          loading="lazy"
+          className={`h-full w-full object-cover ${item.pos} scale-105 grayscale-[35%] contrast-115 transition-transform duration-700 group-hover:scale-110`}
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-40"
+          style={{ background: "var(--gradient-red)" }}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-deep-red/80 via-transparent to-transparent" />
+        <span className="eyebrow absolute left-5 top-5 rounded-full bg-cream/85 px-3 py-1 text-deep-red">
+          {String(items.indexOf(item) + 1).padStart(2, "0")}
+        </span>
+      </div>
+
+      <div className="relative p-6">
+        <Icon className="h-6 w-6 text-brand" strokeWidth={1.5} />
+        <h3 className="mt-4 text-2xl text-ink">{item.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-ink/65">{item.line}</p>
+      </div>
     </div>
   );
 }
