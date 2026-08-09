@@ -21,17 +21,17 @@ export function Connect() {
               href={l.href}
               target="_blank"
               rel="noreferrer noopener"
-              className="flex items-center justify-between gap-4 rounded-2xl border border-cream/25 px-6 py-7 transition-all duration-300 hover:-translate-y-1 hover:bg-cream"
+              className="group flex items-center justify-between gap-4 rounded-2xl border border-cream/25 px-6 py-7 transition-all duration-300 hover:-translate-y-1 hover:bg-cream"
             >
               <span className="min-w-0">
-                <span className="block font-display text-3xl text-cream group-hover:text-brand [a:hover_&]:text-brand">
+                <span className="block font-display text-3xl text-cream transition-colors group-hover:text-brand">
                   {l.label}
                 </span>
-                <span className="mt-1 block truncate font-mono text-[0.65rem] tracking-[0.18em] uppercase text-cream/70 [a:hover_&]:text-brand/70">
+                <span className="mt-1 block truncate font-mono text-[0.65rem] tracking-[0.18em] uppercase text-cream/70 transition-colors group-hover:text-brand/70">
                   {l.sub}
                 </span>
               </span>
-              <span className="shrink-0 font-mono text-sm text-cream/80 [a:hover_&]:text-brand">
+              <span className="shrink-0 font-mono text-sm text-cream/80 transition-colors group-hover:text-brand">
                 →
               </span>
             </a>
